@@ -40,6 +40,17 @@ def createDatabase():
     else:
         return response.errorView(dbCreateRes,400)
 
-# run flask service
+### Set custom header to all responses
+# @app.after_request
+# def apply_caching(response):
+#     response.headers["Content-Type"] = "application/json"
+#     return response
+
+### Handle 404 exception
+@app.errorhandler(404)
+def page_not_found(e):
+    return response.errorView("Page not found",404)
+
+# Start REST API flask service
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8082, debug=True)
