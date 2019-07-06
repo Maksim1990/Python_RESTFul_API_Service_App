@@ -11,7 +11,7 @@ from system.config import config
 
 # Initialize Flask api
 db.init_app(app)
-api = Api(app,prefix='/api/v1')
+api = Api(app,prefix=config["api_prefix"])
 
 api.add_resource(UserResource, '/users/<user_id>')
 api.add_resource(UserCollection, '/users')
