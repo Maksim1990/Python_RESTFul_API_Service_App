@@ -1,11 +1,10 @@
 import sqlalchemy
+import os
 
-
-DATABASE = 'flaskDB'
-PASSWORD = 'flask'
-USER = 'root'
+DATABASE = os.getenv('DATABASE')
+PASSWORD = os.getenv('PASSWORD')
+USER = os.getenv('USER')
 HOSTNAME = 'mysql_flask'
-
 
 def get_connection():
 	dbConn = sqlalchemy.create_engine('mysql://%s:%s@%s/%s'%(USER, PASSWORD, HOSTNAME, DATABASE)) # connect to server

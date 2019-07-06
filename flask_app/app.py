@@ -20,7 +20,9 @@ api.add_resource(Auth, '/register')
 
 @app.route('/')
 def index():
-    return response.view({'info': "Flask REST API"},200)
+    return response.view({
+        'info': "Flask REST API"
+    },200)
 
 @app.route(config["api_prefix"]+'/migrate')
 @jwt_required()

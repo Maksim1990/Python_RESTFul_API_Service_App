@@ -6,3 +6,4 @@ flask-migrate
 flask-script
 flask-mysqldb
 Flask-JWT
+python-dotenv
