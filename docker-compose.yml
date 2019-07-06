@@ -1,0 +1,26 @@
+version: '3.7'
+services:
+  web_flask:
+    container_name: flask_api
+    build: 
+      context: ./
+      dockerfile: ./docker/flask/Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./flask_app:/app
+    environment:
+      FLASK_ENV: development
+    depends_on:
+        - mysql_flask
+  redis_flask:
+    image: "redis:alpine"
+  mysql_flask:
+    image: mysql:5.7.21
+    environment:
+        - MYSQL_ROOT_PASSWORD=flask
+        - MYSQL_DATABASE=flaskDB
+    ports:
+        - "8990:3306"
+    volumes:
+        - ./data/mysql:/var/lib/mysql
