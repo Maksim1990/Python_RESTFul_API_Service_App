@@ -28,7 +28,7 @@ jobs:
           name: Build custom Docker image
           command: |
             TAG=latest
-            docker build -t   $DOCKER_IMAGE_NAME:$TAG -f ./docker/flask/Dockerfile .
+            docker build -t   $DOCKER_IMAGE_NAME:$TAG -f ./docker/flask/Dockerfile_deploy .
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker push $DOCKER_IMAGE_NAME:$TAG
 
