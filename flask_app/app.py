@@ -13,7 +13,7 @@ import os
 
 
 SWAGGER_URL = '/api/docs'
-API_URL = os.getenv('API_URL')
+API_URL = 'http://localhost:5000/swagger'
 
 # Call factory function to create our blueprint
 swaggerui_blueprint = get_swaggerui_blueprint(
