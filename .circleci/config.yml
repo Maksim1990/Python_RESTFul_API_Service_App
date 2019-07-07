@@ -53,7 +53,7 @@ jobs:
           name: Copy docker folder & compose file to the server
           command: |
               scp -r ./docker-compose.yml $SSH_USER_VPS@$SSH_HOST_VPS:$PROJECT_DIR
-              cd .deploy && scp -r ./env $SSH_USER_VPS@$SSH_HOST_VPS:$PROJECT_DIR
+              cd ./deploy && scp -r ./env $SSH_USER_VPS@$SSH_HOST_VPS:$PROJECT_DIR
       - run:
           name: Login into Docker Hub account
           command: ssh $SSH_USER_VPS@$SSH_HOST_VPS "cd $PROJECT_DIR && docker login -u $DOCKER_USER -p $DOCKER_PASS"
