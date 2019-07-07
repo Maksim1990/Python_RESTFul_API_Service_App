@@ -5,4 +5,4 @@ sed -e "s/\${APP_HTTP_PORT}/${DEV_HTTP_PORT}/g;
 
 sed -e "s/\${APP_HTTP_PORT}/${DEV_HTTP_PORT}/g;
          s/\${APP_MYSQL_DATABASE}/${DEV_MYSQL_DATABASE}/g;
-         s/\${APP_MYSQL_PASSWORD}/${DEV_MYSQL_PASSWORD}/g;"  ./deploy/.env.dist.deploy > ./deploy/.env.dist
+         s/\${APP_MYSQL_PASSWORD}/${DEV_MYSQL_PASSWORD}/g;"  ./deploy/.env.dist.deploy > ./deploy/env/.env.dist
