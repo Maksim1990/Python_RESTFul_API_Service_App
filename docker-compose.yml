@@ -12,10 +12,10 @@ services:
     environment:
       FLASK_ENV: development
     depends_on:
-        - mysql_flask
+        - mysql
   redis_flask:
     image: "redis:alpine"
-  mysql_flask:
+  mysql:
     image: mysql:5.7.21
     environment:
         - MYSQL_ROOT_PASSWORD=flask

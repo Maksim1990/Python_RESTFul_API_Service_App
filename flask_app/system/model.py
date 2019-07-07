@@ -6,7 +6,7 @@ import database.db
 from dotenv import load_dotenv
 import os
 
-app = Flask(__name__)
+app = Flask(__name__,template_folder='../templates')
 
 # load dotenv in the base root
 APP_ROOT = os.path.join(os.path.dirname(__file__), '..')   # refers to application_top
