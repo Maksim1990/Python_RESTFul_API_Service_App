@@ -1,18 +1,18 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "Discoveringworld API documentation <br> <br> For Authorization header use following format `Bearer`+`spase`+`Authorization Token`<br><br> Athentication token should be added in header in each request when call secure REST API endpoint.",
+    "description": "For Authorization header use following format `Bearer`+`spase`+`Authorization Token`<br><br> Athentication token should be added in header in each request when call secure REST API endpoint.",
     "version": "1.0.0",
-    "title": "Golang Service Pack REST API",
+    "title": "Python Flask REST API Logging Microservice",
     "contact": {
-      "email": "info@cactus.com"
+      "email": "narushevich.maksim@gmail.com"
     },
     "license": {
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   },
-  "host": "localhost:9090",
+  "host": "localhost:5000",
   "basePath": "/api/v1",
   "tags": [
     {
@@ -56,7 +56,7 @@
                 "password": {
                   "type": "string"
                 },
-                "password_confirmation": {
+                "phone": {
                   "type": "string"
                 }
               }
@@ -213,6 +213,9 @@
                 },
                 "password": {
                   "type": "string"
+                },
+                "phone": {
+                  "type": "string"
                 }
               }
             }
@@ -264,56 +267,6 @@
           },
           "404": {
             "description": "User not found"
-          }
-        },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
-      }
-    },
-    "/log": {
-      "post": {
-        "tags": [
-          "Logging"
-        ],
-        "summary": "Send data to logging service",
-        "description": "Recieve, validate & send data to logging service",
-        "operationId": "log",
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "data",
-            "description": "Data to be logged (multiple key-value pairs can be sent)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "field1": {
-                  "type": "string"
-                },
-                "field2": {
-                  "type": "string"
-                },
-                "field3": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful request"
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "500": {
-            "description": "Server error"
           }
         },
         "security": [

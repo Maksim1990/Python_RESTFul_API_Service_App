@@ -23,6 +23,7 @@ app.config['SECRET_KEY'] = config["secret_key"]
 app.config['JWT_AUTH_HEADER_PREFIX'] = config["jwt_auth_header_prefix"]
 app.config['JWT_AUTH_URL_RULE'] = config["api_prefix"]+'/login'
 app.config['JWT_EXPIRATION_DELTA'] = config["token_expiration_time"]
+app.config['JWT_AUTH_USERNAME_KEY'] = 'login'
 jwt = JWT(app, authenticate, identity)
 
 
