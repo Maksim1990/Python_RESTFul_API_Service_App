@@ -49,6 +49,8 @@ jobs:
           command: |
               find ./deploy/ -type f -iname "*.sh" -exec chmod +x {} \;
               ./deploy/mapping_environment_credentials_and_ports.sh $DEPLOY_WITH_SHARED_MYSQL
+              sed -i "s/\localhost:5000/${SSH_HOST_VPS}:${DEV_HTTP_PORT}/g;"  ./flask_app/api/swagger.json
+              sed -i "s/\localhost:5000/${SSH_HOST_VPS}:${DEV_HTTP_PORT}/g;"  ./flask_app/app.py
       - run:
           name: Copy docker folder & compose file to the server
           command: |
