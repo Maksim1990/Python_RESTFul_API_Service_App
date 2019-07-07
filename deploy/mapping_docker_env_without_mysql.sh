@@ -4,4 +4,5 @@ sed -e "s/\${APP_HTTP_PORT}/${DEV_HTTP_PORT}/g;"  ./deploy/docker-compose_with_m
 
 sed -e "s/\${APP_HTTP_PORT}/${DEV_HTTP_PORT}/g;
          s/\${APP_MYSQL_DATABASE}/${DEV_MYSQL_DATABASE}/g;
+         s/\${APP_BASE_URL}/${SSH_HOST_VPS}/g;
          s/\${APP_MYSQL_PASSWORD}/${DEV_SHARED_MYSQL_PASSWORD}/g;"  ./deploy/.env.dist.deploy > ./deploy/env/.env.dist
