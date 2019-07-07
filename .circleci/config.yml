@@ -28,6 +28,8 @@ jobs:
           name: Build custom Docker image
           command: |
             TAG=latest
+            sed -i "s/\localhost:5000/${SSH_HOST_VPS}:${DEV_HTTP_PORT}/g;"  ./flask_app/api/swagger.json
+            sed -i "s/\localhost:5000/${SSH_HOST_VPS}:${DEV_HTTP_PORT}/g;"  ./flask_app/app.py
             docker build -t   $DOCKER_IMAGE_NAME:$TAG -f ./docker/flask/Dockerfile_deploy .
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker push $DOCKER_IMAGE_NAME:$TAG
@@ -49,8 +51,6 @@ jobs:
           command: |
               find ./deploy/ -type f -iname "*.sh" -exec chmod +x {} \;
               ./deploy/mapping_environment_credentials_and_ports.sh $DEPLOY_WITH_SHARED_MYSQL
-              sed -i "s/\localhost:5000/${SSH_HOST_VPS}:${DEV_HTTP_PORT}/g;"  ./flask_app/api/swagger.json
-              sed -i "s/\localhost:5000/${SSH_HOST_VPS}:${DEV_HTTP_PORT}/g;"  ./flask_app/app.py
       - run:
           name: Copy docker folder & compose file to the server
           command: |
