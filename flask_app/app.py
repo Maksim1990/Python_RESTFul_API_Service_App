@@ -56,14 +56,6 @@ def migrateTables():
     except IntegrityError:
         return json.dumps({'status': False})
 
-@app.route(config["api_prefix"]+'/dbcreate')
-#@jwt_required()
-def createDatabase():
-    dbCreateRes=database.db.create_db("new")
-    if dbCreateRes==True:
-        return response.view({'status': "Successfully created!"},200)
-    else:
-        return response.errorView(dbCreateRes,400)
 
 ### Set custom header to all responses
 # @app.after_request
