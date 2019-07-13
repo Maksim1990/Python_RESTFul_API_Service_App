@@ -38,7 +38,6 @@ api.add_resource(Auth, '/register')
 def index():
     return response.view({
         'info': "Flask REST API",
-        'url': 'mysql://%s:%s@%s/%s'%(os.getenv('USER'), os.getenv('PASSWORD'), 'mysql', os.getenv('DATABASE'))
     },200)
 
 ### Return Swagger Json file
