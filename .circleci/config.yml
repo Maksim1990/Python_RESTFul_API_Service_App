@@ -7,7 +7,6 @@ executors:
       - image: circleci/python:3.7-stretch
         environment:
           DOCKER_IMAGE_NAME: maksim1990/flask_rest_api_service
-          DB_HOST: 127.0.0.1
 
 jobs:
   build:
