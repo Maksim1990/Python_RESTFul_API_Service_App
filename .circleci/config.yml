@@ -65,10 +65,6 @@ jobs:
               ssh $SSH_USER_VPS@$SSH_HOST_VPS "cd $PROJECT_DIR && docker-compose down"
               ssh $SSH_USER_VPS@$SSH_HOST_VPS "cd $PROJECT_DIR && docker-compose up -d --no-deps --force-recreate"
       - run:
-          name: Set up Flask environment
-          command: |
-              ssh $SSH_USER_VPS@$SSH_HOST_VPS "cd $PROJECT_DIR && docker exec flask_api cp ./env/.env.dist ./.env"
-      - run:
           name: Clean not used docker files
           command: ssh $SSH_USER_VPS@$SSH_HOST_VPS "cd $PROJECT_DIR && docker image prune -a -f"
 
