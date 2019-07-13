@@ -48,7 +48,7 @@ def swagger():
     return content
 
 @app.route(config["api_prefix"]+'/migrate')
-@jwt_required()
+#@jwt_required()
 def migrateTables():
     try:
         db.create_all()
@@ -57,7 +57,7 @@ def migrateTables():
         return json.dumps({'status': False})
 
 @app.route(config["api_prefix"]+'/dbcreate')
-@jwt_required()
+#@jwt_required()
 def createDatabase():
     dbCreateRes=database.db.create_db("new")
     if dbCreateRes==True:
