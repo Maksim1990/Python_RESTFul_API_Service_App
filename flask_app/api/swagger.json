@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "For Authorization header use following format `Bearer`+`spase`+`Authorization Token`<br><br> Athentication token should be added in header in each request when call secure REST API endpoint.",
+    "description": "For Authorization header use following format `Bearer`+`space`+`Authorization Token`<br><br> Athentication token should be added in header in each request when call secure REST API endpoint.",
     "version": "1.0.0",
     "title": "Python Flask REST API Logging Microservice",
     "contact": {
