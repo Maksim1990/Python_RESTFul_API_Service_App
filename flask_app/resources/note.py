@@ -24,6 +24,15 @@ def encodeObjectID(doc):
         doc['_id'] = str(doc['_id'])
     return doc
 
+def deleteErrorMessage():
+    return response.errorView('Note with such ID and \'user_id\' does not exist',400)
+
+def customExceptionHandler(ex):
+    if type(ex).__name__== 'InvalidId':
+        return response.errorView("Provided 'note_id' is invalid",400)
+    else:
+        return response.errorView(str(ex),400)
+
 # Notes collection class
 class NoteCollection(Resource):
     decorators = [checkuser, jwt_required()]
@@ -60,8 +69,6 @@ class NoteResource(Resource):
         except:
           return response.errorView('Provided note_id is invalid',400)
 
-
-
     def delete(self, user_id,note_id):
         try:
             noteItem=mongo.db.notes.find_one({'user_id': int(user_id),'_id': ObjectId(note_id)}, {'_id': 1})
@@ -69,12 +76,9 @@ class NoteResource(Resource):
                 mongo.db.notes.delete_one({'user_id': int(user_id),"_id":ObjectId(note_id)})
                 return response.view('Note was successfully deleted!',200)
             else:
-                return response.errorView('Note with this ID does not exist',400)
+                return deleteErrorMessage()
         except Exception as ex:
-            if type(ex).__name__== 'InvalidId':
-                return response.errorView("Provided 'note_id' is invalid",400)
-            else:
-                return response.errorView(str(ex),400)
+            return customExceptionHandler(ex)
 
     def put(self, user_id,note_id):
         try:
@@ -84,9 +88,6 @@ class NoteResource(Resource):
                 mongo.db.notes.update_one({'user_id': int(user_id),"_id":ObjectId(note_id)},updateValues)
                 return response.view("Successfully updated",200)
             else:
-                return response.errorView('Note with such ID and \'user_id\' does not exist',400)
+                return deleteErrorMessage()
         except Exception as ex:
-            if type(ex).__name__== 'InvalidId':
-                return response.errorView("Provided 'note_id' is invalid",400)
-            else:
-                return response.errorView(str(ex),400)
+            return customExceptionHandler(ex)
