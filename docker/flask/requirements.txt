@@ -8,3 +8,4 @@ flask-mysqldb
 Flask-JWT
 python-dotenv
 flask-swagger-ui
+Flask-PyMongo

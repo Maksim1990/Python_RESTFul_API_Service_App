@@ -2,8 +2,15 @@
 ##### REST API App based on Python Flask framework with JWT Authentiaction
 
 ### Part of [Laravel Base API microservices project](https://github.com/Maksim1990/Laravel_Base_API_project)
+- [CHECK ALSO SWAGGER DOCS OF DEMO APP](http://185.177.59.147:5001/api/docs/)
 
-- [CHECK ALSO SWAGGER DOCS OF REAL DEMO APP](http://185.177.59.147:5001/api/docs/)
+---
+#### _Microservice for storing user's notes_
+**FOLLOWING TECHNOLOGIES ARE USED**
+- Python 3.7, Flask framework
+- MySQL, MongoDB
+---
+
 
 **HOT TO INSTALL APP**
 --

@@ -7,16 +7,19 @@ services:
       dockerfile: ./docker/flask/Dockerfile
     ports:
       - "5000:5000"
+    networks:
+      - docker-shared-services
+      - net
     volumes:
       - ./flask_app:/app
     environment:
       FLASK_ENV: development
     depends_on:
         - mysql
-  redis_flask:
-    image: "redis:alpine"
   mysql:
     image: mysql:5.7.21
+    networks:
+      - net
     environment:
         - MYSQL_ROOT_PASSWORD=flask
         - MYSQL_DATABASE=flaskDB
@@ -24,3 +27,23 @@ services:
         - "8990:3306"
     volumes:
         - ./data/mysql:/var/lib/mysql
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb_service
+    networks:
+      - docker-shared-services
+      - net
+    #restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: mongoroot
+    volumes:
+      - ./data/mongo:/data/db
+    ports:
+      - "27020:27017"
+
+networks:
+  docker-shared-services:
+    external: true
+  net:
+    driver: bridge

@@ -5,8 +5,16 @@ from flask_sqlalchemy import SQLAlchemy
 import database.db
 from dotenv import load_dotenv
 import os
+from flask_pymongo import PyMongo
 
 app = Flask(__name__,template_folder='../templates')
+
+
+
+
+app.config["MONGO_URI"] = "mongodb://root:mongoroot@mongodb/flask_notepad_db?authSource=admin"
+mongo = PyMongo(app)
+
 
 # load dotenv in the base root
 APP_ROOT = os.path.join(os.path.dirname(__file__), '..')   # refers to application_top
@@ -23,5 +31,3 @@ manager.add_command('db', MigrateCommand)
 
 if __name__ == '__main__':
 	manager.run()
-
-
