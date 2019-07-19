@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-sed -e "s/\${APP_HTTP_PORT}/${DEV_HTTP_PORT}/g;"  ./deploy/docker-compose_with_mysql_as_shared_service.dev.tpl.yml > docker-compose.yml
+sed -e "s/\${APP_HTTP_PORT}/${DEV_HTTP_PORT}/g;
+        s/\${APP_MONGO_USER}/${DEV_MONGO_USER}/g;
+        s/\${APP_MONGO_PASSWORD}/${DEV_MONGO_PASSWORD}/g;
+        s/\${APP_MONGO_PORT}/${DEV_MONGO_PORT}/g;"  ./deploy/docker-compose_with_mysql_as_shared_service.dev.tpl.yml > docker-compose.yml
 
 sed -e "s/\${APP_HTTP_PORT}/${DEV_HTTP_PORT}/g;
          s/\${APP_MYSQL_DATABASE}/${DEV_MYSQL_DATABASE}/g;
