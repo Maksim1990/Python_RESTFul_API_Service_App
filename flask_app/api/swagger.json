@@ -3,7 +3,7 @@
   "info": {
     "description": "For Authorization header use following format `Bearer`+`space`+`Authorization Token`<br><br> Athentication token should be added in header in each request when call secure REST API endpoint.",
     "version": "1.0.0",
-    "title": "Python Flask REST API Logging Microservice",
+    "title": "Python Flask REST API Notepad Microservice",
     "contact": {
       "email": "narushevich.maksim@gmail.com"
     },
@@ -275,6 +275,228 @@
           }
         ]
       }
+    },
+    "/notes/{user_id}": {
+      "get": {
+        "tags": [
+          "Notes"
+        ],
+        "summary": "Get note list per user",
+        "description": "Return all notes list per user",
+        "operationId": "all_notes",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "User ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Notes"
+        ],
+        "summary": "Add new note",
+        "description": "Add new note per user",
+        "operationId": "createNote",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "User ID",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "data",
+            "description": "Note data (can be any valid JSON data)",
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/notes/{user_id}/{note_id}": {
+      "get": {
+        "tags": [
+          "Notes"
+        ],
+        "summary": "Get specific note by ID per user",
+        "description": "",
+        "operationId": "getNote",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "User ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "note_id",
+            "in": "path",
+            "description": "Note ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "User or Note not found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Notes"
+        ],
+        "summary": "Updated note",
+        "description": "This can only be done by the authorized user.",
+        "operationId": "updateNote",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "User ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "note_id",
+            "in": "path",
+            "description": "Note ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "data",
+            "description": "Note data (can be any valid JSON data)",
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request"
+          },
+          "400": {
+            "description": "Invalid movie supplied"
+          },
+          "404": {
+            "description": "User or Note not found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Notes"
+        ],
+        "summary": "Delete note per user",
+        "description": "",
+        "operationId": "deletNote",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "User ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "note_id",
+            "in": "path",
+            "description": "Note ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "User or Note not found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
     }
   },
   "securityDefinitions": {
@@ -308,6 +530,20 @@
       },
       "xml": {
         "name": "User"
+      }
+    },
+    "Note": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "integer"
+        },
+        "user_id": {
+          "type": "integer"
+        }
+      },
+      "xml": {
+        "name": "Note"
       }
     },
     "ErrorResponse": {
