@@ -64,7 +64,7 @@ class NoteResource(Resource):
 
     def delete(self, user_id,note_id):
         try:
-            noteItem=mongo.db.notes.find_one({{'user_id': int(user_id),'_id': ObjectId(note_id)}, {'_id': 1})
+            noteItem=mongo.db.notes.find_one({'user_id': int(user_id),'_id': ObjectId(note_id)}, {'_id': 1})
             if noteItem != None:
                 mongo.db.notes.delete_one({'user_id': int(user_id),"_id":ObjectId(note_id)})
                 return response.view('Note was successfully deleted!',200)
