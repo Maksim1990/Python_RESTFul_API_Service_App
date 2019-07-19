@@ -3,6 +3,7 @@ from flask_jwt import JWT, jwt_required, current_identity
 import system.responces.api_response as response
 from system.model import db
 from functools import wraps
+import json
 
 
 def checkuser(func):
@@ -35,6 +36,9 @@ class User(db.Model):
 	def __repr__(self):
 		return '<User %r>' % self.username
 
+def getUserJSONFormat(user):
+    return {'username':user.username,'email': user.email, 'phone': user.phone, 'created_at': user.created_at.__str__()}
+
 # User resource class
 class UserResource(Resource):
     decorators = [checkuser, jwt_required()]
@@ -42,7 +46,7 @@ class UserResource(Resource):
         user = User.query.filter_by(id=user_id).first()
         if not user:
             return response.errorView('User not found',404)
-        data=  {'username':user.username,'email': user.email, 'phone': user.phone, 'created_at': user.created_at.__str__()}
+        data=getUserJSONFormat(user)
         return response.view(data,200)
 
     def delete(self, user_id):
@@ -64,7 +68,7 @@ class UserResource(Resource):
                     continue
                 setattr(user, key, value)
         db.session.commit()
-        return response.view("Updated",201)
+        return response.view(getUserJSONFormat(user),201)
 
 # User collection class
 class UserCollection(Resource):
@@ -90,5 +94,3 @@ def get_request_args():
     parser.add_argument('email')
     parser.add_argument('phone')
     return parser.parse_args()
-
-

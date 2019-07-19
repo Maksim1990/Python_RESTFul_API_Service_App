@@ -2,6 +2,7 @@ from system.model import db, app
 import simplejson as json
 from sqlalchemy.exc import IntegrityError
 from resources.user import UserResource, UserCollection
+from resources.note import NoteResource,NoteCollection
 from flask_restful import Api
 import database.db
 import system.responces.api_response as response
@@ -32,6 +33,10 @@ api = Api(app,prefix=config["api_prefix"])
 api.add_resource(UserResource, '/users/<user_id>')
 api.add_resource(UserCollection, '/users')
 api.add_resource(Auth, '/register')
+
+# Notes routes (MongoDB)
+api.add_resource(NoteCollection, '/notes/<int:user_id>')
+api.add_resource(NoteResource, '/notes/<int:user_id>/<note_id>')
 
 
 @app.route('/')
