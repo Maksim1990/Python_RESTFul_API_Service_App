@@ -64,7 +64,7 @@ class NoteResource(Resource):
 
     def delete(self, user_id,note_id):
         try:
-            noteItem=mongo.db.notes.find_one({'_id': ObjectId(note_id)}, {'_id': 1})
+            noteItem=mongo.db.notes.find_one({{'user_id': int(user_id),'_id': ObjectId(note_id)}, {'_id': 1})
             if noteItem != None:
                 mongo.db.notes.delete_one({'user_id': int(user_id),"_id":ObjectId(note_id)})
                 return response.view('Note was successfully deleted!',200)
@@ -84,7 +84,7 @@ class NoteResource(Resource):
                 mongo.db.notes.update_one({'user_id': int(user_id),"_id":ObjectId(note_id)},updateValues)
                 return response.view("Successfully updated",200)
             else:
-                return response.errorView('Note with this ID does not exist',400)
+                return response.errorView('Note with such ID and \'user_id\' does not exist',400)
         except Exception as ex:
             if type(ex).__name__== 'InvalidId':
                 return response.errorView("Provided 'note_id' is invalid",400)
