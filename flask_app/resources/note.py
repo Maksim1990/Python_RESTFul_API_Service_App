@@ -7,7 +7,6 @@ from functools import wraps
 from resources.user import User
 from system.model import mongo
 import json
-from bson import json_util
 from bson import ObjectId
 
 def checkuser(func):
